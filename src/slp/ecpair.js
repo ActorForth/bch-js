@@ -3,7 +3,7 @@
 
 const BCHJSECPair = require("../ecpair")
 
-const bchaddrjs = require("bchaddrjs-slp")
+const bchaddrjs = require("bch-addr-slp")
 
 class ECPair extends BCHJSECPair {
   /*

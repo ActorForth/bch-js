@@ -1,7 +1,7 @@
 const Bitcoin = require("bitcoincashjs-lib")
 const coininfo = require("coininfo")
 const bip32utils = require("bip32-utils")
-const bchaddrjs = require("bchaddrjs-slp")
+const bchaddrjs = require("bch-addr-slp")
 
 class HDNode {
   constructor(address) {

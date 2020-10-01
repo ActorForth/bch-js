@@ -2,7 +2,7 @@ const BCHJSAddress = require("../address")
 // const bchAddress = new BCHJSAddress()
 let bchAddress
 
-const bchaddrjs = require("bchaddrjs-slp")
+const bchaddrjs = require("bch-addr-slp")
 
 class Address extends BCHJSAddress {
   constructor(config) {
@@ -306,6 +306,60 @@ class Address extends BCHJSAddress {
     const cashAddr = bchaddrjs.toCashAddress(address)
     return bchAddress.isTestnetAddress(cashAddr)
   }
+
+  /**
+   * @api SLP.Address.isTestnetAddress() isTestnetAddress()
+   * @apiName isTestnetAddress
+   * @apiGroup SLP
+   * @apiDescription Detect if testnet address.
+   *
+   * @apiExample Example usage:
+   *  // cashaddr mainnet
+   *  bchjs.SLP.Address.isTestnetAddress('bitcoincash:qqfx3wcg8ts09mt5l3zey06wenapyfqq2qrcyj5x0s')
+   *  //false
+   *
+   *  // w/ no cashaddr prefix
+   *  bchjs.SLP.Address.isTestnetAddress('qqfx3wcg8ts09mt5l3zey06wenapyfqq2qrcyj5x0s')
+   *  // false
+   *
+   *  // slpaddr mainnet
+   *  bchjs.SLP.Address.isTestnetAddress('simpleledger:qqfx3wcg8ts09mt5l3zey06wenapyfqq2q0r0fpx3w')
+   *  //false
+   *
+   *  // w/ no slpaddr prefix
+   *  bchjs.SLP.Address.isTestnetAddress('qqfx3wcg8ts09mt5l3zey06wenapyfqq2q0r0fpx3w')
+   *  // false
+   *
+   *  // legacy mainnet
+   *  bchjs.SLP.Address.isTestnetAddress('14krEkSaKoTkbFT9iUCfUYARo4EXA8co6M')
+   *  // false
+   *
+   *  // cashaddr testnet
+   *  bchjs.SLP.Address.isTestnetAddress('bchtest:qph2v4mkxjgdqgmlyjx6njmey0ftrxlnggt9t0a6zy')
+   *  // true
+   *
+   *  // testnet w/ no cashaddr prefix
+   *  bchjs.SLP.Address.isTestnetAddress('qph2v4mkxjgdqgmlyjx6njmey0ftrxlnggt9t0a6zy')
+   *  // true
+   *
+   *  // slpaddr testnet
+   *  bchjs.SLP.Address.isTestnetAddress('slptest:qph2v4mkxjgdqgmlyjx6njmey0ftrxlnggs3v58dse')
+   *  // true
+   *
+   *  // testnet w/ no slpaddr prefix
+   *  bchjs.SLP.Address.isTestnetAddress('qph2v4mkxjgdqgmlyjx6njmey0ftrxlnggs3v58dse')
+   *  // true
+   *
+   *  // testnet legacy
+   *  bchjs.SLP.Address.isTestnetAddress('mqc1tmwY2368LLGktnePzEyPAsgADxbksi')
+   *  // true
+   */
+  isRegTestAddress(address) {
+    this._ensureValidAddress(address)
+    const cashAddr = bchaddrjs.toCashAddress(address)
+    return bchAddress.isRegTestAddress(cashAddr)
+  }
+
   /**
    * @api SLP.Address.isP2PKHAddress() isP2PKHAddress()
    * @apiName isP2PKHAddress
