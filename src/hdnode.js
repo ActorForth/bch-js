@@ -34,9 +34,19 @@ class HDNode {
    */
   fromSeed(rootSeedBuffer, network = "mainnet") {
     let bitcoincash
-    if (network === "bitcoincash" || network === "mainnet")
-      bitcoincash = coininfo.bitcoincash.main
-    else bitcoincash = coininfo.bitcoincash.test
+
+    switch (network) {
+      case "bitcoincash":
+        bitcoincash = coininfo.bitcoincash.main
+      case "mainnet":
+        bitcoincash = coininfo.bitcoincash.main
+      case "bchtest":
+        bitcoincash = coininfo.bitcoincash.test
+      case "bchreg":
+        bitcoincash = coininfo.bitcoincash.regtest
+      default:
+        bitcoincash = coininfo.bitcoincash.main
+    }
 
     const bitcoincashBitcoinJSLib = bitcoincash.toBitcoinJS()
     return Bitcoin.HDNode.fromSeedBuffer(
